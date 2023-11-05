@@ -40,7 +40,11 @@ public class ShopAdapter extends PagedListAdapter<ShopModel, ShopAdapter.ShopVie
         holder.binding.setModel(shopModel);
         holder.itemView.setOnClickListener(view -> {
             Bundle bundle = new Bundle();
-            bundle.putInt("id", holder.binding.getModel().id);
+            bundle.putFloat("rating", holder.binding.getModel().getRating().getRate());
+            bundle.putString("title", holder.binding.getModel().title);
+            bundle.putString("desc", holder.binding.getModel().description);
+            bundle.putString("image", holder.binding.getModel().image);
+            bundle.putString("price", String.valueOf(holder.binding.getModel().getPrice()));
             NavHostFragment navHostFragment = (NavHostFragment) fragmentActivity.getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
             NavController navController = navHostFragment.getNavController();
             navController.navigate(R.id.action_homeShopItemsFragment_to_productDetailsFragment, bundle);

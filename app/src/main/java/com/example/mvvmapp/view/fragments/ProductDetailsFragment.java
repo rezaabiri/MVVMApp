@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
 import com.example.mvvmapp.R;
 import com.example.mvvmapp.databinding.FragmentProductDetailsBinding;
 
@@ -34,7 +35,16 @@ public class ProductDetailsFragment extends Fragment {
 
     private void getDataBundle(){
         assert getArguments() != null;
-        int id = getArguments().getInt("id");
-       binding.textid.setText(String.valueOf(id));
+        float rating = getArguments().getFloat("rating");
+        String image = getArguments().getString("image");
+        String title = getArguments().getString("title");
+        String desc = getArguments().getString("desc");
+        String price = getArguments().getString("price");
+
+        binding.rating.setRating(rating);
+        Glide.with(this).load(image).into(binding.imageview);
+        binding.productName.setText(title);
+        binding.productDesc.setText(desc);
+        binding.productPrice.setText(price+" $ ");
     }
 }

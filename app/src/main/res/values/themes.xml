@@ -6,4 +6,10 @@
     </style>
 
     <style name="Theme.MVVMApp" parent="Base.Theme.MVVMApp" />
+
+    <style name="customRatingBar"
+        parent="android:style/Widget.Material.RatingBar.Small">
+        <item name="colorControlNormal">#BDBDBD</item>
+        <item name="colorControlActivated">#FFEB3B</item>
+    </style>
 </resources>

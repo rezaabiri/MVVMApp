@@ -82,28 +82,4 @@ public class ShopModel {
         this.rating = rating;
     }
 }
-class Rating{
-    @SerializedName("rate")
-    @Expose
-    public double rate;
-    @SerializedName("count")
-    @Expose
-    public int count;
-
-    public double getRate() {
-        return rate;
-    }
-
-    public void setRate(double rate) {
-        this.rate = rate;
-    }
-
-    public int getCount() {
-        return count;
-    }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-}
 

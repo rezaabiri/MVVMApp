@@ -20,8 +20,8 @@ public class ShopItemDataSource extends PageKeyedDataSource<Integer, ShopModel> 
 
     @Override
     public void loadInitial(@NonNull LoadInitialParams<Integer> params, @NonNull LoadInitialCallback<Integer, ShopModel> callback) {
-        int currentPage = 0; // شماره صفحه فعلی
-        int nextPage = currentPage + 1; // شماره صفحه بعدی
+        int currentPage = 0;
+        int nextPage = currentPage + 1;
 
         shopRepository.getConfig(currentPage, new RepositoryCallback<ArrayList<ShopModel>>() {
             @Override
@@ -43,8 +43,8 @@ public class ShopItemDataSource extends PageKeyedDataSource<Integer, ShopModel> 
 
     @Override
     public void loadAfter(@NonNull LoadParams<Integer> params, @NonNull LoadCallback<Integer, ShopModel> callback) {
-        int currentPage = params.key; // شماره صفحه فعلی
-        int nextPage = currentPage + 1; // شماره صفحه بعدی
+        int currentPage = params.key;
+        int nextPage = currentPage + 1;
 
         shopRepository.getConfig(currentPage, new RepositoryCallback<ArrayList<ShopModel>>() {
             @Override
@@ -53,9 +53,7 @@ public class ShopItemDataSource extends PageKeyedDataSource<Integer, ShopModel> 
             }
 
             @Override
-            public void onFailure(String errorMessage) {
-                // Handle failure
-            }
+            public void onFailure(String errorMessage) {}
         });
     }
 }
