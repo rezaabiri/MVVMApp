@@ -1,35 +1,45 @@
 package com.example.mvvmapp.model.repositories;
 
-import androidx.annotation.NonNull;
+import android.widget.Toast;
 
 import com.example.mvvmapp.model.models.Constructors;
 
-import retrofit2.Call;
-import retrofit2.Callback;
+import javax.inject.Inject;
+
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
+import retrofit2.HttpException;
 import retrofit2.Response;
 
 public class BaseRepository {
 
-    public <T> void enqueueWithRetry(Constructors constructors, Call<T> request, Callback<T> callback) {
-
-        request.enqueue(new Callback<T>() {
+    public <T> Observable<Response<T>> observe(Observable<Response<T>> request) {
+        return Observable.create(emitter -> request.subscribe(new Observer<Response<T>>() {
             @Override
-            public void onResponse(@NonNull Call<T> call, @NonNull Response<T> response) {
-                if (response.code() == 200){
-                    callback.onResponse(call, response);
+            public void onSubscribe(Disposable d) {}
+
+            @Override
+            public void onNext(Response<T> t) {
+                if (t.isSuccessful()){
+                    emitter.onNext(t);
+                    //Toast.makeText(constructors.getContext(), "hello", Toast.LENGTH_SHORT).show();
                 }else {
-                    callback.onFailure(call, new Throwable());
+                    throw new HttpException(t);
                 }
-
             }
 
             @Override
-            public void onFailure(@NonNull Call<T> call, @NonNull Throwable t) {
-                callback.onFailure(call, t);
+            public void onError(Throwable e) {
+                emitter.onError(e);
             }
-        });
-    }
 
+            @Override
+            public void onComplete() {
+                emitter.onComplete();
+            }
+        }));
+    }
     /*public <T> void refreshTokenAndRetry(Call<T> request, Context context, ViewModelStoreOwner owner, LifecycleOwner lifecycle, Callback<T> callback) {
         try {
             RefreshTokenViewModel viewModel = new ViewModelProvider(owner).get(RefreshTokenViewModel.class);

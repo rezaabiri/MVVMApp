@@ -11,6 +11,14 @@ public class Rating {
     @Expose
     public int count;
 
+    public Rating(float rate, int count) {
+        this.rate = rate;
+        this.count = count;
+    }
+
+    public Rating() {
+    }
+
     public float getRate() {
         return rate;
     }

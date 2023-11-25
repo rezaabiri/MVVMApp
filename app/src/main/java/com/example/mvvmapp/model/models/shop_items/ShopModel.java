@@ -26,6 +26,19 @@ public class ShopModel {
     @Expose
     public Rating rating;
 
+    public ShopModel(int id, String title, double price, String description, String category, String image, Rating rating) {
+        this.id = id;
+        this.title = title;
+        this.price = price;
+        this.description = description;
+        this.category = category;
+        this.image = image;
+        this.rating = rating;
+    }
+
+    public ShopModel() {
+    }
+
     public int getId() {
         return id;
     }

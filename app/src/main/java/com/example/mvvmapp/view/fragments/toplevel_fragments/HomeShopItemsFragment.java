@@ -1,4 +1,6 @@
-package com.example.mvvmapp.view.fragments;
+package com.example.mvvmapp.view.fragments.toplevel_fragments;
+
+import static com.example.mvvmapp.Utils.visibleNav;
 
 import android.os.Bundle;
 
@@ -42,6 +44,8 @@ public class HomeShopItemsFragment extends Fragment {
     private void init(){
         shopViewModel = new ViewModelProvider(this).get(ShopViewModel.class);
         initRecyclerview();
+        visibleNav(getActivity());
+
     }
 
     private void initRecyclerview(){

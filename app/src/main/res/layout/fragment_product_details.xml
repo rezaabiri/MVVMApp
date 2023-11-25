@@ -64,6 +64,14 @@
                     android:layout_marginBottom="24dp"
                     android:text="@string/hello_blank_fragment" />
 
+                <Button
+                    android:id="@+id/button_buy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Buy"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    />
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 

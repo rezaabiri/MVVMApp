@@ -22,7 +22,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel;
 public class ShopViewModel extends ViewModel {
 
 
-    private ShopRepository shopRepository;
+    private final ShopRepository shopRepository;
     private LiveData<PagedList<ShopModel>> shopItems;
 
     @Inject

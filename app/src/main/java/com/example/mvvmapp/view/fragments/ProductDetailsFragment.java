@@ -1,15 +1,18 @@
 package com.example.mvvmapp.view.fragments;
 
+import static com.example.mvvmapp.Utils.goneNav;
+
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.navigation.NavOptions;
+import androidx.navigation.Navigation;
 
 import com.bumptech.glide.Glide;
 import com.example.mvvmapp.R;
@@ -31,6 +34,8 @@ public class ProductDetailsFragment extends Fragment {
 
     private void init(){
         getDataBundle();
+        goneNav(getActivity());
+        buyProduct();
     }
 
     private void getDataBundle(){
@@ -46,5 +51,20 @@ public class ProductDetailsFragment extends Fragment {
         binding.productName.setText(title);
         binding.productDesc.setText(desc);
         binding.productPrice.setText(price+" $ ");
+    }
+
+    private void buyProduct(){
+        binding.buttonBuy.setOnClickListener(view -> {
+            Navigation.findNavController(view).navigate(R.id.action_productDetailsFragment_to_profileFragment);
+
+           /* Navigation.findNavController(view).navigate(
+                    R.id.action_productDetailsFragment_to_profileFragment,
+                    null,
+                    new NavOptions.Builder()
+                            .setPopUpTo(R.id.profileFragment, true)
+                            .build()
+            );*/
+
+        });
     }
 }

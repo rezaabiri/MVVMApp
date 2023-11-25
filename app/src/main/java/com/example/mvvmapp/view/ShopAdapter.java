@@ -38,18 +38,26 @@ public class ShopAdapter extends PagedListAdapter<ShopModel, ShopAdapter.ShopVie
     public void onBindViewHolder(@NonNull ShopViewHolder holder, int position) {
         ShopModel shopModel = getItem(position);
         holder.binding.setModel(shopModel);
-        holder.itemView.setOnClickListener(view -> {
-            Bundle bundle = new Bundle();
-            bundle.putFloat("rating", holder.binding.getModel().getRating().getRate());
-            bundle.putString("title", holder.binding.getModel().title);
-            bundle.putString("desc", holder.binding.getModel().description);
-            bundle.putString("image", holder.binding.getModel().image);
-            bundle.putString("price", String.valueOf(holder.binding.getModel().getPrice()));
-            NavHostFragment navHostFragment = (NavHostFragment) fragmentActivity.getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
-            NavController navController = navHostFragment.getNavController();
-            navController.navigate(R.id.action_homeShopItemsFragment_to_productDetailsFragment, bundle);
-        });
+        //String imageUrl = shopModel.getImage(); // یا هر متد دیگری که شما برای دریافت URL تصویر دارید
+        //Glide.with(holder.binding.imageView.getContext()).load(imageUrl).into(holder.binding.imageView);
+        holder.itemView.setOnClickListener(view -> sendArgs(holder));
 
+    }
+
+    private void sendArgs(ShopViewHolder holder){
+        Bundle bundle = new Bundle();
+        bundle.putFloat("rating", holder.binding.getModel().getRating().getRate());
+        bundle.putString("title", holder.binding.getModel().title);
+        bundle.putString("desc", holder.binding.getModel().description);
+        bundle.putString("image", holder.binding.getModel().image);
+        bundle.putString("price", String.valueOf(holder.binding.getModel().getPrice()));
+        navigateToDetails(bundle);
+    }
+
+    private void navigateToDetails(Bundle bundle){
+        NavHostFragment navHostFragment = (NavHostFragment) fragmentActivity.getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        NavController navController = navHostFragment.getNavController();
+        navController.navigate(R.id.action_homeShopItemsFragment_to_productDetailsFragment, bundle);
     }
 
     @NonNull
@@ -69,7 +77,7 @@ public class ShopAdapter extends PagedListAdapter<ShopModel, ShopAdapter.ShopVie
         }
     }
 
-    @BindingAdapter("image")
+    @BindingAdapter("image_item")
     public static void getImage(ImageView view, String url) {
         Glide.with(view).load(url).into(view);
     }

@@ -15,7 +15,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.fragments.HomeShopItemsFragment">
+        tools:context=".view.fragments.toplevel_fragments.HomeShopItemsFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_shop"

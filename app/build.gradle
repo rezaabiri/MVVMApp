@@ -1,7 +1,7 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.org.jetbrains.kotlin.android)
-    alias(libs.plugins.org.jetbrains.kotlin.kapt)
+    //alias(libs.plugins.org.jetbrains.kotlin.kapt)
 
 }
 apply plugin: 'com.google.dagger.hilt.android'
@@ -47,6 +47,7 @@ android {
     }
     ndkVersion '21.1.6352462'
     buildToolsVersion '33.0.2'
+
 }
 
 dependencies {
@@ -74,9 +75,12 @@ dependencies {
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.9.0'
     implementation 'com.github.bumptech.glide:glide:4.16.0'
     kapt "org.jetbrains.kotlinx:kotlinx-metadata-jvm:0.5.0"
-
+    testImplementation libs.mockwebserver.v4110
+    testImplementation 'org.mockito:mockito-core:3.10.0'
+    testImplementation 'androidx.arch.core:core-testing:2.1.0'
+    testImplementation "org.robolectric:robolectric:4.11.1"
+    implementation 'com.github.ibrahimsn98:SmoothBottomBar:1.7.9'
     def nav_version = "2.7.5"
-
     // Java language implementation
     implementation "androidx.navigation:navigation-fragment:$nav_version"
     implementation "androidx.navigation:navigation-ui:$nav_version"
